@@ -9,16 +9,17 @@ CYC.ui.Login = (function($){
     
     function login(email, password) {    
     	$.post(
-    		CYC.config.baserUrl + "services/account/login", 
-    		{email: email, password: passowrd}
-    		).success(function() {
+    		CYC.config.baserUrl + "/account/login", 
+    		JSON.stringify({email: email, password: passowrd}),
+    		function() {
     			// redirect to listing page from here
     			
-    		})
-    		.error(function() {
-    			// handle failure. maybe display a message
-    		});  
-        return true;
+    		}
+		"JSON")
+		.error(function() {
+			// handle failure. maybe display a message
+			alert("An error occured");
+		});  
     }
     
     // Do your jquery binding here
@@ -28,6 +29,8 @@ CYC.ui.Login = (function($){
         	var pass = $("#password").val();
         	
         	login(email, pass);
+        	
+        	e.preventDefault();
         });
     }
 
